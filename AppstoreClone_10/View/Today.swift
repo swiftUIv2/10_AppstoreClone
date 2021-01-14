@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Today: View {
     var animation: Namespace.ID
+    @EnvironmentObject var detail: DetailViewModel
     
     var body: some View {
         
@@ -17,7 +18,7 @@ struct Today: View {
             VStack {
                 HStack(alignment: .bottom){
                     VStack(alignment: .leading, spacing: 5) {
-                        Text("wednesday 23 december")
+                        Text("THURSDAY 14 JANUARY")
                             .foregroundColor(.secondary)
                         Text("Today")
                             .font(.largeTitle)
@@ -25,8 +26,9 @@ struct Today: View {
                     }
                     Spacer()
                     Button(action: {}) {
-                        Image(systemName: "person.circle")
-                            .font(.largeTitle)
+                        Image("al")
+                            .resizable()
+                            .frame(width: 35, height: 35)
                     }
                 }
                 .padding()
@@ -35,6 +37,12 @@ struct Today: View {
                     
                     //CardView...
                     TodayCardView(item: item, animation: animation)
+                        .onTapGesture {
+                            withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.8, blendDuration: 0.8)) {
+                                detail.selectedItem = item
+                                detail.show.toggle()
+                            }
+                        }
                 }
             }
             .padding(.bottom)

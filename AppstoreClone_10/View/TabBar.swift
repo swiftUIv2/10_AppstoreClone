@@ -17,6 +17,7 @@ struct TabBar: View {
             TabView {
                 
                 Today(animation: animation)
+                    .environmentObject(detailObject)
                     .tabItem {
                         Image(systemName: "calendar")
                         Text("Today")
@@ -42,6 +43,14 @@ struct TabBar: View {
             }
             .accentColor(.orange)
             .foregroundColor(.primary)
+            
+            //hiding tabBar when detail page opens...
+            .opacity(detailObject.show ? 0 : 1)
+            
+            if detailObject.show {
+                
+                Detail(detail: detailObject, animation: animation)
+            }
         }
     }
 }
